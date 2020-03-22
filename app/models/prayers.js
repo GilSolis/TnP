@@ -9,5 +9,5 @@ let Prayer = sequelize.define("prayer", {
 
 //Sync with DB
 Prayer.sync();
-
+console.log("prayer sequelize");
 module.exports = Prayer;

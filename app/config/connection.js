@@ -2,7 +2,7 @@
 
 const Sequelize = require("sequelize");
 
-var sequelize = new Sequelize("TnP", "root", "password1", {
+var sequelize = new Sequelize("tnp", "root", "password1", {
   host: "localhost",
   port: 3306,
   dialect: "mysql",
@@ -12,6 +12,7 @@ var sequelize = new Sequelize("TnP", "root", "password1", {
     idle: 10000
   }
 });
+console.log("touching DB");
 
 // Exports the connection for other files to use
 module.exports = sequelize;

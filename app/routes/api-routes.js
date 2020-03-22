@@ -1,4 +1,4 @@
-let Prayer = require("../models/prayers.js");
+var Prayer = require("../models/prayers.js");
 
 //routes
 module.exports = function(app) {
@@ -16,6 +16,7 @@ module.exports = function(app) {
       Location: req.body.location,
       Thoughts: req.body.prayer
     }).then(function(results) {
+      //   console.log(results);
       res.end();
     });
   });
