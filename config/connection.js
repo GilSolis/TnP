@@ -1,6 +1,6 @@
 // CONNECTION.JS - THIS FILE INITIATES THE CONNECTION TO MYSQL
 
-const Sequelize = require("sequlize");
+const Sequelize = require("sequelize");
 
 var sequelize = new Sequelize("TnP", "root", "password1", {
   host: "localhost",
