@@ -8,6 +8,6 @@ let Prayer = sequelize.define("prayer", {
 });
 
 //Sync with DB
-Prayer.sync();
+Prayer.sync({ force: false });
 console.log("prayer sequelize");
 module.exports = Prayer;

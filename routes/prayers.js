@@ -4,18 +4,17 @@ var Prayer = require("../models/prayers.js");
 module.exports = function(app) {
   //get all prayers
   app.get("/api/all", function(req, res) {
-    Prayer.findAll({}).then(function(results) {
+    Prayer.findAll({
+      limit: parseInt(req.query.limit) || 10,
+      offset: parseInt(req.query.offset) || 0
+    }).then(function(results) {
       res.json(results);
     });
   });
 
   //Add a prayer
   app.post("/api/new", function(req, res) {
-    Prayer.create({
-      Name: req.body.name,
-      Location: req.body.location,
-      Thoughts: req.body.prayer
-    }).then(function(results) {
+    Prayer.create(req.body).then(function(results) {
       //   console.log(results);
       res.end();
     });

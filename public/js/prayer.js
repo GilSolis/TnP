@@ -1,3 +1,7 @@
+console.log("JS: Loaded");
+const LIMIT = 3;
+let offset = 0;
+
 //Add button
 $("#prayerSubmit").on("click", function(event) {
   event.preventDefault();
@@ -10,7 +14,7 @@ $("#prayerSubmit").on("click", function(event) {
     Location: $("#location")
       .val()
       .trim(),
-    Thoughts: $("prayerBox")
+    Thoughts: $("#prayerBox")
       .val()
       .trim()
   };
@@ -33,17 +37,26 @@ $("#prayerSubmit").on("click", function(event) {
   $("#prayerBox").val("");
 });
 
-$.get("/api/all", function(data) {
-  if (data.length !== 0) {
-    for (var i = 0; i < data.length; i++) {
-      var row = $("<div>");
-      row.addClass("prayer");
+getPrayers(LIMIT, offset);
+function getPrayers(limit, offset) {
+  $.get("/api/all?offset=" + offset + "&limit=" + limit, function(data) {
+    $("#prayerArea").empty();
+    if (data.length !== 0) {
+      for (var i = 0; i < data.length; i++) {
+        var row = $("<div>");
+        row.addClass("prayer");
 
-      row.append("<p>" + data[i].author + "</p>");
-      row.append("<p>" + data[i].Location + "</p>");
-      row.append("<p>" + data[i].body + "</p>");
+        row.append("<p>" + data[i].Name + "</p>");
+        row.append("<p>" + data[i].Location + "</p>");
+        row.append("<p>" + data[i].Thoughts + "</p>");
 
-      $("#prayerArea").prepend(row);
+        $("#prayerArea").append(row);
+      }
     }
-  }
+  });
+}
+
+$("#next").on("click", function() {
+  offset += LIMIT;
+  getPrayers(LIMIT, offset);
 });

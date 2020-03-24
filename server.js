@@ -12,7 +12,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //routes
-require("./app/routes/api-routes.js")(app);
+require("./routes/prayers.js")(app);
+
 app.listen(PORT, function() {
   console.log("App is listening on PORT" + PORT);
 });
